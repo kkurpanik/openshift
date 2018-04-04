@@ -1,6 +1,6 @@
 $TTL 86400
 @	IN	SOA	masterdns.oso.local. root.oso.local. (
-	0504180000	;Serial
+	0704180000	;Serial
 	3600		;Refresh
 	1800		;Retry
 	604800		;Expire
@@ -9,3 +9,4 @@ $TTL 86400
 @	IN	NS	masterdns.oso.local.
 @	IN	A	192.168.122.26
 masterdns	IN	A	192.168.122.26
+master	CNAME	masterdns
