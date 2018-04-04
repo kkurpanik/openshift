@@ -8,6 +8,8 @@ $TTL 86400
 )
 @	IN	NS	masterdns.oso.local.
 @	IN	PTR	oso.local.
-masterdns	IN	A	192.168.122.26
-26	IN	PTR	masterdns.oso.local.
+masterdns	IN	A	192.168.122.93
+master		IN	A	192.168.122.26
+26	IN	PTR	master.oso.local.
+93	IN	PTR	masterdns.oso.local.
 

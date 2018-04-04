@@ -7,6 +7,6 @@ $TTL 86400
 	86400		;Minimum TTL
 )
 @	IN	NS	masterdns.oso.local.
-@	IN	A	192.168.122.26
-masterdns	IN	A	192.168.122.26
-master	CNAME	masterdns
+@	IN	A	192.168.122.93
+masterdns	IN	A	192.168.122.93
+master		IN	A	192.168.122.26

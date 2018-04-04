@@ -1,2 +1,5 @@
 [openshift-hosts]
-openshift
+master
+
+[openshift-helpers]
+openshift-helper
