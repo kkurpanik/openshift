@@ -1,0 +1,41 @@
+---
+- hosts: all
+  tasks:
+  - name: Install required packages
+    yum: pkg={{item}} state=latest
+    with_items:
+      - net-tools
+      - bind-utils
+      - iptables-services
+      - bridge-utils
+      - bash-completion
+      - kexec-tools
+      - sos
+      - psacct
+      - docker
+      - python-gobject
+      - NetworkManager-glib
+  - name: Start and enable docker service
+    service: name=docker state=started enabled=yes
+  - name: Install DNS server packages
+    yum: pkg={{item}} state=latest
+    with_items:
+      - bind
+      - bind-utils
+  - name: Configure DNS master
+    copy: src="templates/named.conf" dest=/etc/ owner=root group=named mode=640
+  - name: Copy DNS zone definitions
+    copy: src={{item}} dest=/var/named/ owner=root group=named mode=640
+    with_items:
+      - templates/forward.oso
+      - templates/reverse.oso
+  - name: Start and enable DNS server
+    service: name=named state=restarted enabled=yes
+  - name: Reconfigure resolv.conf nameserver
+    nmcli: conn_name=eth0 type=ethernet dns4=192.168.122.26 state=present
+  - name: Reconfigure resolv.conf search domain
+    command: nmcli con mod eth0 ipv4.dns-search "oso.local"
+  - name: Ignore auto dns
+    command: nmcli con mod eth0 ipv4.ignore-auto-dns yes
+  - name: Restart networking services
+    service: name=network state=restarted

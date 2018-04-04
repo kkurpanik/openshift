@@ -1,0 +1,13 @@
+$TTL 86400
+@	IN	SOA	masterdns.oso.local. root.oso.local. (
+	0504180000	;Serial
+	3600		;Refresh
+	1800		;Retry
+	604800		;Expire
+	86400		;Minimum TTL
+)
+@	IN	NS	masterdns.oso.local.
+@	IN	PTR	oso.local.
+masterdns	IN	A	192.168.122.26
+26	IN	PTR	masterdns.oso.local.
+
