@@ -25,6 +25,8 @@
     service: name=named state=restarted enabled=yes
   - name: Open ports on firewall
     firewalld: service=dns permanent=true state=enabled
+  - name: Restart firewalld
+    service: name=firewalld state=restarted
   - name: Reconfigure resolv.conf nameserver
     nmcli: conn_name=eth0 type=ethernet dns4=192.168.122.93 state=present
   - name: Reconfigure resolv.conf search domain
@@ -35,6 +37,10 @@
     service: name=network state=restarted
   - name: Copy OpenShift inventory file
     copy: src="templates/hosts" dest="/etc/ansible/" owner=root group=root mode=644
+  - name: Update Ansible to 2.4.3.0
+    yum:
+      pkg: https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.4.3.0-1.el7.ans.noarch.rpm
+      state: latest
 
 - hosts: openshift-hosts
   tasks:
