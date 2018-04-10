@@ -9,6 +9,7 @@
       - net-tools
       - wget
       - telnet
+      - httpd-tools
   - name: Install DNS server packages
     yum: pkg={{item}} state=latest
     with_items:
