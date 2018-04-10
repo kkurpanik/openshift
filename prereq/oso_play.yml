@@ -10,6 +10,7 @@
       - wget
       - telnet
       - httpd-tools
+      - java-1.8.0-openjdk-headless
   - name: Install DNS server packages
     yum: pkg={{item}} state=latest
     with_items:
